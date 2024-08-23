@@ -1,0 +1,78 @@
+---
+# TODO: set draft: True  # this gets removed by the preprocessor
+format: html
+code-fold: true
+editor: source
+params: 
+  inputFilePrefix: dt  # NOTE: this must = dt2023 for prerender to work
+---
+
+```{r}
+#| code-summary: select only unique coverage points
+# Load necessary libraries
+library(dplyr)
+library(glue)
+library(here)
+
+pattern <- paste0({params$inputFilePrefix}, "\\d{4}\\.csv")
+
+# List all files matching the pattern
+files <- list.files(
+  path = here("data/01_raw"), pattern = pattern, full.names = TRUE
+)
+
+# Initialize an empty list to store data
+data_list <- list()
+
+# Loop over the files
+for (file in files) {
+  # Read the CSV file
+  data <- read.csv(file)
+  print(glue("reading {file}..."))
+  
+  # Select the desired columns
+  selected_data <- data %>%
+    select(LAT_DEGREES, LON_DEGREES, YEAR, MONTH, DAY, HABITAT_CD) %>%
+    mutate(date = sprintf("%04d-%02d-%02d", YEAR, MONTH, DAY)) %>%
+    mutate(`system:time_start` = as.numeric(as.POSIXct(
+      date, format="%Y-%m-%d", tz="UTC"
+    )) * 1000) %>%
+    select(-YEAR, -MONTH, -DAY) %>%
+    rename(latitude = LAT_DEGREES, longitude = LON_DEGREES)
+  
+  # Keep only the rows with unique values across the selected columns
+  unique_data <- selected_data %>%
+    distinct()
+  
+  # Append the data to the list
+  data_list[[length(data_list) + 1]] <- unique_data
+}
+
+# Combine all data into a single dataframe
+combined_data <- do.call(rbind, data_list)
+
+# Display the filtered unique data
+print(combined_data)
+
+write.csv(combined_data, here(glue("data/02_reduced/{params$inputFile}.csv")), row.names=FALSE)
+```
+
+```{r}
+#| code-summary: map the points
+library(sf)
+library(ggplot2)
+library(ggspatial)
+# Convert the data to a spatial format (sf object)
+selected_data_sf <- st_as_sf(combined_data, coords = c("longitude", "latitude"), crs = 4326)
+
+# Plot the points on a map
+ggplot(data = selected_data_sf) +
+  annotation_map_tile(type = "osm") +  # Add a basemap (OpenStreetMap)
+  geom_sf(aes(color = HABITAT_CD), size = 2, alpha = 0.7) +
+  theme_minimal() +
+  labs(title = "Map of Latitude and Longitude Points with Basemap",
+       x = "Longitude",
+       y = "Latitude",
+       color = "Habitat Code") +
+  theme(legend.position = "bottom")
+```

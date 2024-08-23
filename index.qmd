@@ -1,0 +1,6 @@
+---
+title: "rvc_percent_cover"
+---
+
+This project tranforms Reef Visual Census data for the Florida Keys for use in assessment of bottom cover maps.
+
