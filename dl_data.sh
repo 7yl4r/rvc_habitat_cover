@@ -10,8 +10,14 @@ REGION_YEARS["DRY+TORT"]="
 2004
 2006
 2008
+2010
+2012
+2014
+2016
+2018
+2021
+2023
 "
-# TODO: finish DRY+TORT
 REGION_YEARS["FGNMS"]="
 2018
 2022
@@ -22,8 +28,21 @@ REGION_YEARS["FLA+KEYS"]="
 2000
 2001
 2002
+2003
+2004
+2005
+2006
+2007
+2008
+2009
+2010
+2011
+2012
+2014
+2016
+2018
+2022
 "
-# TODO: finish FLA+KEYS
 # TODO: add other regions
 
 # Base URL
@@ -47,8 +66,11 @@ for REGION in "${!REGION_YEARS[@]}"; do
         # Construct the URL
         URL="${BASE_URL}?utf8=%E2%9C%93&region=${REGION}&year=${YEAR}&format=csv&commit=Download"
         
+        # Replace any '+' with '_'
+        SAFE_REGION="${REGION//+/_}"
+        
         # Construct the output file name
-        OUTPUT_FILE="data/01_raw/${REGION}_${YEAR}.csv"
+        OUTPUT_FILE="data/01_raw/${SAFE_REGION}_${YEAR}.csv"
         
         # Download the file
         echo "Downloading ${OUTPUT_FILE}..."

@@ -4,11 +4,11 @@ title: "rvc_percent_cover"
 
 This project tranforms Reef Visual Census data for the Florida Keys for use in assessment of bottom cover maps.
 
-`.csv` files produced from this code can be uploaded into Google Earth Engine as a table asset.
+`.csv` files produced from this code can be uploaded into Google Earth Engine (GEE) as a table asset.
 Tables can then be used as a FeatureCollection, filtered, and displayed:
 
 ```javascript
-var fc = ee.FeatureCollection("projects/imars-ee/assets/RVC_DryTortugas")
+var fc = ee.FeatureCollection("projects/imars-ee/assets/YOUR_ASSET_NAME_HERE")
   .filterDate("2023-01-01", "2024-07-01")
   .filter(ee.Filter.eq("HABITAT_CD", "CONT_LR"))
 ;
@@ -16,3 +16,5 @@ var fc = ee.FeatureCollection("projects/imars-ee/assets/RVC_DryTortugas")
 Map.addLayer(fc)
 Map.centerObject(fc)
 ```
+
+Links for direct access to tables already uploaded into GEE coming soon.

@@ -1,0 +1,8 @@
+---
+title: "Area Reports"
+description: "Reports for each study area."
+code-fold: true
+listing:
+  contents: aoi_reports
+  type: grid
+---

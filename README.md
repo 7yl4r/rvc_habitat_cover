@@ -5,3 +5,12 @@
     * use bash file `dl_data.sh` at your own risk
 * `quarto render`
 * `.csv` files will be created in `data/02_reduced` for each region
+
+## NOTES:
+### regions
+This only works for FGBNS, FLA_KEYS, and DRY_TORT regions. 
+To add more regions: modify `dl_data.sh` and `R/preRender.R`
+
+### years
+`dl_data.sh` only downloads years listed as of 2024-08. 
+To add additional years: modify `dl_data.sh` before running.

@@ -10,7 +10,8 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - about.qmd
+        aoi_report/aoi_reports.qmd
+      - #about.qmd
 
 format:
   html:

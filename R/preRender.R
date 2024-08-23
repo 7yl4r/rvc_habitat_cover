@@ -1,12 +1,12 @@
 # creates a report template .qmd for each
 REPORT_PREFIX = "aoi_report"
 SUBSTITUTIONS = list(
-  c("dt", "{{reportName}}")
+  c("DRY_TORT_", "{{reportName}}")
 )
 # Set the root directory where the folders are located
 DATA_DIR <- "data/01_raw/"
 REPORT_NAMES = list(
-  "dt", "fgb"
+  "DRY_TORT_", "FLA_KEYS_", "FGNMS_"
 )
 
 if (!nzchar(system.file(package = "librarian"))) {
