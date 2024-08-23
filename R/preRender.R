@@ -1,7 +1,7 @@
 # creates a report template .qmd for each
 REPORT_PREFIX = "aoi_report"
 SUBSTITUTIONS = list(
-  c("dt", "{{inputFilePrefix}}")
+  c("dt", "{{reportName}}")
 )
 # Set the root directory where the folders are located
 DATA_DIR <- "data/01_raw/"
@@ -27,7 +27,7 @@ REPORTS_DIR = glue("{REPORT_PREFIX}/{REPORT_PREFIX}s")
 
 # create the template
 templ <- readLines(REPORT_TEMPLATE) 
-for (sub in subs) {
+for (sub in SUBSTITUTIONS) {
   templ <- gsub(sub[1], sub[2], templ)
 }
 

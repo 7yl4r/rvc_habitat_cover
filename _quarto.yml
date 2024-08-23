@@ -1,5 +1,8 @@
 project:
   type: website
+  pre-render: R/preRender.R
+  render:
+    - "*.qmd"
 
 website:
   title: "rvc_percent_cover"
