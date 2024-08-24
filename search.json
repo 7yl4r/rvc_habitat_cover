@@ -32,7 +32,7 @@
     "href": "index.html",
     "title": "rvc_percent_cover",
     "section": "",
-    "text": "This project tranforms Reef Visual Census data for the Florida Keys for use in assessment of bottom cover maps.\n.csv files produced from this code can be uploaded into Google Earth Engine (GEE) as a table asset. Tables can then be used as a FeatureCollection, filtered, and displayed:\nvar table = ee.FeatureCollection(\"projects/imars-ee/assets/RVC/FLA_KEYS\")\n  .filterDate(\"2020-01-01\", \"2024-01-01\")\n  .filter(ee.Filter.eq(\"HABITAT_CD\", \"CONT_LR\"))\n;\n  \nMap.addLayer(fc)\nMap.centerObject(fc)\nLinks for direct access to tables already uploaded into GEE: * DRY_TORT * FLA_KEYS * FGBNMS\nSource code for this site and analysis can be found here."
+    "text": "This project tranforms Reef Visual Census data for the Florida Keys for use in assessment of bottom cover maps.\n.csv files produced from this code can be uploaded into Google Earth Engine (GEE) as a table asset. Tables can then be used as a FeatureCollection, filtered, and displayed:\nvar table = ee.FeatureCollection(\"projects/imars-ee/assets/RVC/FLA_KEYS\")\n  .filterDate(\"2020-01-01\", \"2024-01-01\")\n  .filter(ee.Filter.eq(\"HABITAT_CD\", \"CONT_LR\"))\n;\n  \nMap.addLayer(fc)\nMap.centerObject(fc)\nLinks for direct access to tables already uploaded into GEE:\n\nDRY_TORT\nFLA_KEYS\nFGBNMS\n\nSource code for this site and analysis can be found here."
   },
   {
     "objectID": "aoi_report/aoi_report_template.html",
