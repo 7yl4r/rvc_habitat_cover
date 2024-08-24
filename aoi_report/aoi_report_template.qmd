@@ -76,3 +76,20 @@ ggplot(data = selected_data_sf) +
        color = "Habitat Code") +
   theme(legend.position = "bottom")
 ```
+
+```{r}
+#| code-summary: see distribution of cover points
+# Ensure ggplot2 is installed
+if(!require(ggplot2)) {
+  install.packages("ggplot2")
+}
+
+# Load the ggplot2 package
+library(ggplot2)
+
+# Create the bar chart
+ggplot(combined_data, aes(x = HABITAT_CD)) +
+  geom_bar() +
+  labs(title = "Bar Chart of HABITAT_CD", x = "Habitat Code", y = "Count") +
+  theme_minimal()
+```
