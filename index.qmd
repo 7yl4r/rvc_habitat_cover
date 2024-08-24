@@ -19,4 +19,4 @@ Map.centerObject(fc)
 
 Links for direct access to tables already uploaded into GEE coming soon.
 
-Source code for this site and analysis can be found [here](https://github.com/7yl4r/rvc_habitat_cover).
+Source code for this site and analysis can be found [here](https://github.com/USF-IMARS/rvc_habitat_cover).
