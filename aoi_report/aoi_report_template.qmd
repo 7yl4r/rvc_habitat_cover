@@ -1,11 +1,13 @@
 ---
-# TODO: set draft: True  # this gets removed by the preprocessor
+title: "DRY_TORT_ Report"
 format: html
 code-fold: true
 editor: source
 params: 
-  inputFilePrefix: DRY_TORT_  # NOTE: this must = dt2023 for prerender to work
+  inputFilePrefix: DRY_TORT_  # NOTE: this must = DRY_TORT_ for prerender to work
 ---
+
+# DRY_TORT_
 
 ```{r}
 #| code-summary: select only unique coverage points
@@ -37,7 +39,7 @@ for (file in files) {
     mutate(`system:time_start` = as.numeric(as.POSIXct(
       date, format="%Y-%m-%d", tz="UTC"
     )) * 1000) %>%
-    select(-YEAR, -MONTH, -DAY) %>%
+    select( -MONTH, -DAY) %>%
     rename(latitude = LAT_DEGREES, longitude = LON_DEGREES)
   
   # Keep only the rows with unique values across the selected columns
@@ -51,10 +53,6 @@ for (file in files) {
 # Combine all data into a single dataframe
 combined_data <- do.call(rbind, data_list)
 
-# Display the filtered unique data
-print(combined_data)
-
-write.csv(combined_data, here(glue("data/02_reduced/{params$inputFile}.csv")), row.names=FALSE)
 ```
 
 ```{r}
@@ -77,19 +75,48 @@ ggplot(data = selected_data_sf) +
   theme(legend.position = "bottom")
 ```
 
+hab code | habitat description
+---------|-------------------------------
+CONT_LR  | continuous low relief
+ISOL_MR  | isolated mid-relief
+ISOL_LR  | isolated low-relief
+SPGR_LR  | spur and groove low relief
+SPGR_HR  | spur and groove high relief
+RUBB_LR  | rubble low relief
+SAND_NA  | Sand
+SGRS_NA  | Seagrass
+UCHB_LR  | Unconsolidated Hardbottom
+
 ```{r}
 #| code-summary: see distribution of cover points
-# Ensure ggplot2 is installed
-if(!require(ggplot2)) {
-  install.packages("ggplot2")
-}
-
-# Load the ggplot2 package
 library(ggplot2)
 
-# Create the bar chart
 ggplot(combined_data, aes(x = HABITAT_CD)) +
   geom_bar() +
   labs(title = "Bar Chart of HABITAT_CD", x = "Habitat Code", y = "Count") +
-  theme_minimal()
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+```{r}
+#| code-summary: see distribution of points over time
+library(ggplot2)
+
+# Create the stacked bar chart
+ggplot(combined_data, aes(x = YEAR, fill = HABITAT_CD)) +
+  geom_bar() +
+  labs(title = "Points Collected Over Time", x = "Year", y = "Count") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+```
+
+```{r}
+#| code-summary: final data cleaning & write to csv
+# Display the filtered unique data
+combined_data <- combined_data %>%
+  select(-YEAR)
+
+write.csv(combined_data, here(glue("data/02_reduced/{params$inputFile}.csv")), row.names=FALSE)
 ```
