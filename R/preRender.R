@@ -6,7 +6,7 @@ SUBSTITUTIONS = list(
 # Set the root directory where the folders are located
 DATA_DIR <- "data/01_raw/"
 REPORT_NAMES = list(
-  "DRY_TORT_", "FLA_KEYS_", "FGNMS_"
+  "DRY_TORT_", "FLA_KEYS_", "FGBNMS_"
 )
 
 if (!nzchar(system.file(package = "librarian"))) {
