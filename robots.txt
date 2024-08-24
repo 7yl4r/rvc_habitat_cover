@@ -1,1 +1,1 @@
-Sitemap: https://7yl4r.github.io/rvc_habitat_cover/sitemap.xml
+Sitemap: https://USF-IMARS.github.io/rvc_habitat_cover/sitemap.xml
