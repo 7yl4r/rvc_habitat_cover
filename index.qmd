@@ -8,8 +8,8 @@ This project tranforms Reef Visual Census data for the Florida Keys for use in a
 Tables can then be used as a FeatureCollection, filtered, and displayed:
 
 ```javascript
-var fc = ee.FeatureCollection("projects/imars-ee/assets/YOUR_ASSET_NAME_HERE")
-  .filterDate("2023-01-01", "2024-07-01")
+var table = ee.FeatureCollection("projects/imars-ee/assets/RVC/FLA_KEYS")
+  .filterDate("2020-01-01", "2024-01-01")
   .filter(ee.Filter.eq("HABITAT_CD", "CONT_LR"))
 ;
   
@@ -17,6 +17,9 @@ Map.addLayer(fc)
 Map.centerObject(fc)
 ```
 
-Links for direct access to tables already uploaded into GEE coming soon.
+Links for direct access to tables already uploaded into GEE:
+* [DRY_TORT](https://code.earthengine.google.com/?asset=projects/imars-ee/assets/RVC/DRY_TORT)
+* [FLA_KEYS](https://code.earthengine.google.com/?asset=projects/imars-ee/assets/RVC/FLA_KEYS)
+* [FGBNMS](https://code.earthengine.google.com/?asset=projects/imars-ee/assets/RVC/FGBNMS)
 
 Source code for this site and analysis can be found [here](https://github.com/USF-IMARS/rvc_habitat_cover).
